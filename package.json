@@ -7,14 +7,10 @@
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "lint-staged"
   },
   "lint-staged": {
     "src/**/*{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --semicolons --write"
-  },
-  "husky": {
-      "hooks": {
-        "pre-commit": "lint-staged"
-      }
   },
   "repository": {
     "type": "git",
