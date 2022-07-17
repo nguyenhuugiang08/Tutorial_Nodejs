@@ -12,7 +12,7 @@ class SiteController {
     //[GET] -> /search
     search(req, res) {
         (async () => {
-            const data = await zing.get_top_100();
+            const data = await zing.get_home();
             res.json(data);
         })();
     }
