@@ -29,10 +29,10 @@
     "mongoose": "^6.4.4",
     "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
     "zingmp3-api-next": "^1.0.4"
   },
   "devDependencies": {
-    "node-sass": "^7.0.1",
-    "nodemon": "^2.0.19"
+    "node-sass": "^7.0.1"
   }
 }
