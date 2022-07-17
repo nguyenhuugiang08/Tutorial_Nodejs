@@ -11,7 +11,7 @@ db.connect();
 const route = require('./routes');
 
 const app = express();
-const port = 3002;
+const port = 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,4 +29,9 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 // Route init
 route(app);
 
-app.listen(port)
+app.set('port', process.env.PORT || 5000);
+
+const server = app.listen(process.env.PORT || 5000, () => {
+    const port = server.address().port;
+    console.log(`Express is working on port ${port}`);
+  });
