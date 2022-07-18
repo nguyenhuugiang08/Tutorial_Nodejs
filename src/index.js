@@ -14,7 +14,11 @@ const route = require('./routes');
 const app = express();
 const port = 8000;
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,7 +39,7 @@ route(app);
 app.set('port', process.env.PORT || 5000);
 
 const server = app.listen(process.env.PORT || 5000, () => {
-    const port = server.address().port;
-    console.log(`Express is working on port ${port}`);
-  });
+  const port = server.address().port;
+  console.log(`Express is working on port ${port}`);
+});
 
