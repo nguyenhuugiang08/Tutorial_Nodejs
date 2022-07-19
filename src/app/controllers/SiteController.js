@@ -10,12 +10,20 @@ class SiteController {
     }
 
     //[GET] -> /home
-    search(req, res) {
+    home(req, res) {
         (async () => {
             const data = await zing.get_home();
             res.json(data);
         })();
     }
+
+    //[GET] -> /search
+    search(req, res, next) {
+        Course.find({})
+            .then(courses => res.json(courses))
+            .catch(next);
+    }
+
 
     //[GET] -> /detailplaylist?id
     detailPlaylist(req, res) {

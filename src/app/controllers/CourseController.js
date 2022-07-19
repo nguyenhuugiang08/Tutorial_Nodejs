@@ -28,7 +28,7 @@ class CourseController {
         formData.thumbnail = `https://i.ytimg.com/an_webp/${req.body.videoId}/mqdefault_6s.webp?du=3000&sqp=CNCpz5YG&rs=AOn4CLCch7qcBtPlWFkzRG6mZSWWoPZUVg`
         const course = new Course(req.body);
         course.save();
-        res.redirect('/courses');
+        res.redirect('/me/Stored/courses');
     }
 
     //[GET] -> /courses/:id/edit
@@ -45,8 +45,29 @@ class CourseController {
             .catch(next);
     }
 
-     //[DELETE] -> /courses/:id
-     delete(req, res, next) {
+    //[DELETE] -> /courses/:id
+    delete(req, res, next) {
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    //[GET] -> /courses/trash
+    trash(req, res, next) {
+        Course.findDeleted({})
+            .then((courses) => res.render('courses/trash', { courses: mutipleMongooseToObject(courses) }))
+            .catch(next);
+    }
+
+    //[PATCH] -> /courses/:id/restore
+    restore(req, res, next) {
+        Course.restore({ _id: req.params.id })
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next);
+    }
+
+    //[DELETE] -> /courses/:id/force
+    forceDelete(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
